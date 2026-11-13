@@ -8,6 +8,42 @@ Biến tài liệu thành kho tri thức có thể truy xuất cho AI agent, r�
 |---|---|---|
 | Tối thiểu **30 trang nội dung** | Tối thiểu **3 cấu hình** | Tối thiểu **20 câu hỏi** |
 
+## Bài nộp — cách setup và chạy lại
+
+Bài làm của Nguyễn Văn Vinh (2A202603672). Báo cáo: [report/individual/2A202603672_NguyenVanVinh.md](report/individual/2A202603672_NguyenVanVinh.md).
+
+| Thành phần | Vị trí |
+|---|---|
+| Code pipeline | [starter/src/](starter/src/) (điểm vào: `run.py`) |
+| Manifest corpus | [data/manifest.json](data/manifest.json) |
+| Benchmark 20 câu + gold | [benchmark/questions.json](benchmark/questions.json) |
+| Cấu hình A/B/C | `STRATEGIES` trong [starter/src/run.py](starter/src/run.py), [artifacts/experiment_log.csv](artifacts/experiment_log.csv) |
+| Kết quả, trace, nhãn audit | [results/](results/) |
+
+Corpus là hai báo cáo "Taking Stock" của World Bank (8/2023 và 3/2025). File PDF **không nằm trong repo**; tải lại theo URL trong manifest. Embedding: `google/embeddinggemma-2` chạy local (768 chiều, chi phí 0). Vector store: Chroma lưu trên đĩa tại `starter/chroma_db/` (máy không có Docker nên không dùng pgvector).
+
+Cần Python 3.11–3.13, khoảng 5 GB đĩa trống và mạng cho lần đầu (thư viện + model ~1,5 GB). Chạy trong PowerShell:
+
+```powershell
+cd starter
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env        # rồi đặt EMBEDDING_MODEL=google/embeddinggemma-2 và VECTOR_STORE=chroma
+curl.exe -L -o data\wb-taking-stock-2023-08.pdf "https://documents.worldbank.org/curated/en/099408408092319382/pdf/IDU0301a3e760c732046e509d3106e81810de4b9.pdf"
+curl.exe -L -o data\wb-taking-stock-2025-03.pdf "https://documents.worldbank.org/curated/en/099919303102515323/pdf/IDU-409e0901-e76f-4c35-b13a-248c3fb8c4c0.pdf"
+python -m src.run --split dev      # chỉ chấm 15 câu dev
+python -m src.run --split all      # dev + test, sinh bảng audit nếu chưa có
+```
+
+Mỗi lần chạy mất khoảng 6 phút trên CPU. `run.py` dừng với thông báo lỗi nếu corpus dưới 30 trang nội dung, benchmark sai cấu trúc hoặc có `evidence_quote` không nằm trên trang gold. Mã SHA-256 của hai PDF đã dùng được ghi trong `results/run_info.json`.
+
+Ba bảng `results/audit_*.csv` chứa nhãn chấm tay và không bị ghi đè khi chạy lại. Nhãn hiện có là **bản nháp do AI (Claude) chấm**, ghi bằng [starter/scripts/fill_audit_labels.py](starter/scripts/fill_audit_labels.py); xem mục hạn chế trong báo cáo.
+
+---
+
+Phần dưới đây là đề bài gốc.
+
 ## Bắt đầu nhanh
 
 Dùng [starter PostgreSQL + pgvector](starter/README.md) để dựng database và hoàn thiện các hàm TODO, hoặc tự chọn vector store tương đương. Starter chỉ là khung: **bạn tự hiện thực pipeline và benchmark**.

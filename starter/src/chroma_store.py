@@ -24,7 +24,7 @@ class ChromaStore:
 
     def describe(self) -> dict[str, Any]:
         return {"store": "Chroma PersistentClient", "chromadb": chromadb.__version__,
-                "path": str(self.path), "collections": "day6_<strategy index>",
+                "path": f"starter/{self.path.name}", "collections": "day6_<strategy index>",
                 "metric": "cosine", "search": "approximate (HNSW, Chroma defaults)"}
 
     def create_schema(self) -> None:

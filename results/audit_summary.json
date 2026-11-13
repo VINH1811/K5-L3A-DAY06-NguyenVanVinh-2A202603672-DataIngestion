@@ -1,0 +1,36 @@
+{
+  "A": {
+    "coherence_mean": 1.0,
+    "coherence_n": 10,
+    "metadata_correct": "15/15",
+    "grounding_counts_0_1_2": [
+      0,
+      1,
+      4
+    ],
+    "grounding_mean": 1.8
+  },
+  "B": {
+    "coherence_mean": 1.6,
+    "coherence_n": 10,
+    "metadata_correct": "15/15",
+    "grounding_counts_0_1_2": [
+      0,
+      0,
+      5
+    ],
+    "grounding_mean": 2.0
+  },
+  "C": {
+    "coherence_mean": 1.6,
+    "coherence_n": 10,
+    "metadata_correct": "15/15",
+    "grounding_counts_0_1_2": [
+      0,
+      0,
+      5
+    ],
+    "grounding_mean": 2.0
+  },
+  "_labeler": "Draft labels by Claude (AI assistant), 2026-11-13; metadata checked by code against PDF text and manifest. Pending review by the student."
+}

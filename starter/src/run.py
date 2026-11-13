@@ -222,7 +222,8 @@ def write_audit_sheets(pages: list[DocumentPage], index_chunks: dict[str, list[C
 
 def package_versions() -> dict[str, str]:
     found = {}
-    for name in ("sentence-transformers", "torch", "psycopg", "pypdf"):
+    for name in ("sentence-transformers", "transformers", "torch", "torchvision", "pillow",
+                 "chromadb", "pypdf"):
         try:
             found[name] = version(name)
         except PackageNotFoundError:

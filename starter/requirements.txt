@@ -3,6 +3,9 @@ psycopg[binary]==3.3.8
 pypdf>=5,<7
 python-dotenv>=1,<2
 # Local embedding model used by src/embeddings.py (pulls in torch).
-sentence-transformers>=3
+sentence-transformers>=6.1
+# google/embeddinggemma-2 loads its image/video processors even for text-only use.
+Pillow
+torchvision
 # Vector store actually used for the reported run (VECTOR_STORE=chroma, the default).
 chromadb>=1

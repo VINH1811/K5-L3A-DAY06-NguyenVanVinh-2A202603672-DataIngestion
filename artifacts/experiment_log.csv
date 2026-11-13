@@ -1,4 +1,4 @@
 strategy,chunking,chunk_size,overlap,metadata,filter,vectorizer,hypothesis,dev_hit1,dev_hit3,test_hit1,test_hit3,notes
-A,,,,,,,,,,,,
-B,,,,,,,,,,,,
-C,,,,,,,,,,,,
+A,fixed_size (per page),500,50,"document_id, source, page, year, section, document_type",none,google/embeddinggemma-2 (768d; local; cosine; Chroma 1.5.9 HNSW),"Baseline: fixed windows will cut sentences and split some evidence across chunks, lowering Hit@1.",8/15,14/15,4/5,4/5,"558 chunks; ingest 168.4 s; re-ingest 558->558. Hypothesis wording recorded after the run; parameters were fixed before it."
+B,by_paragraph (per page; split at sentence ends),800 (max),0,"document_id, source, page, year, section, document_type",none,google/embeddinggemma-2 (768d; local; cosine; Chroma 1.5.9 HNSW),"Paragraph/sentence boundaries keep evidence whole, so Hit@1 and coherence should beat A with fewer chunks.",11/15,15/15,5/5,5/5,"370 chunks; ingest 144.0 s; re-ingest 370->370. A-B changes chunking (and therefore chunk size)."
+C,same index as B,800 (max),0,"document_id, source, page, year, section, document_type","year, only for questions that carry a filter (q14, q15, q19)",google/embeddinggemma-2 (768d; local; cosine; Chroma 1.5.9 HNSW),"Filtering by report year removes wrong-edition chunks for ambiguous questions; no effect on unfiltered questions.",11/15,15/15,5/5,5/5,"Reuses B's chunks and vectors; only difference from B is the filter. Filter respected: dev 2/2 (B 0/2), test 1/1 (B 1/1)."

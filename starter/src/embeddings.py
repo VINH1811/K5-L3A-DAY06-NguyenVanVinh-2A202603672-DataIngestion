@@ -33,8 +33,12 @@ class MyEmbedder:
         if "embeddinggemma-2" in name:
             # Text-only load (270M params) and the prefixes from the model card:
             # prompts "SearchQuery" and "Document". Needs sentence-transformers>=6.1.
+            # float32: the checkpoint defaults to bfloat16, which the model card
+            # advises against on CPU.
+            import torch
             self._model = SentenceTransformer(
-                model_name, config_kwargs={"vision_config": None, "audio_config": None})
+                model_name, config_kwargs={"vision_config": None, "audio_config": None},
+                model_kwargs={"dtype": torch.float32})
             self.query_prefix = "task: search result | query: "
             self.document_prefix = "title: none | text: "
         else:
