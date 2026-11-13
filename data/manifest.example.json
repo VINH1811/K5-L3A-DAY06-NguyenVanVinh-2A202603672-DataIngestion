@@ -1,0 +1,21 @@
+{
+  "warning": "Ví dụ cấu trúc. Copy thành data/manifest.json và thay bằng thông tin thật của corpus; không giữ giá trị ví dụ.",
+  "page_counting_rule": "Chỉ tính trang có nội dung liên quan; loại bìa, mục lục, trang trống, tài liệu tham khảo.",
+  "documents": [
+    {
+      "source_id": "handbook-2025",
+      "title": "Tên tài liệu",
+      "source_path_or_url": "https://example.org/handbook.pdf",
+      "local_path": "starter/data/handbook.pdf",
+      "license_or_permission": "Ghi giấy phép hoặc quyền sử dụng thật",
+      "accessed_at": "YYYY-MM-DD",
+      "physical_pages": 60,
+      "content_pages": "5-40",
+      "metadata": {"year": 2025, "document_type": "handbook"},
+      "sections": [
+        {"section": "tuyen_sinh", "pages": "5-20"},
+        {"section": "hoc_phi", "pages": "21-40"}
+      ]
+    }
+  ]
+}

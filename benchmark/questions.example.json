@@ -1,0 +1,29 @@
+{
+  "warning": "Ví dụ cấu trúc. Tạo benchmark/questions.json với >=20 câu thật (>=15 dev, >=5 test, >=3 câu có filter trong đó >=1 câu test).",
+  "questions": [
+    {
+      "id": "q01",
+      "type": "truc_tiep",
+      "split": "dev",
+      "question": "Hồ sơ phải nộp trước ngày nào?",
+      "expected_answer": "Ngày 30 tháng 6",
+      "gold_source_id": "handbook-2025",
+      "gold_page": 7,
+      "evidence_quote": "Hạn nộp hồ sơ là ngày 30 tháng 6."
+    },
+    {
+      "id": "q02",
+      "type": "metadata",
+      "split": "test",
+      "question": "Trong phần học phí, mức giảm cho sinh viên năm nhất là bao nhiêu?",
+      "expected_answer": "10%",
+      "gold_source_id": "handbook-2025",
+      "gold_page": [23, 24],
+      "evidence_quote": "giảm 10% học phí",
+      "filter": {"section": "hoc_phi"},
+      "alternatives": [
+        {"gold_source_id": "handbook-2025", "gold_page": 31, "evidence_quote": "được giảm 10%"}
+      ]
+    }
+  ]
+}

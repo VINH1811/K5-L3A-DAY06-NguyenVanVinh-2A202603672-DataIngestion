@@ -2,3 +2,7 @@
 psycopg[binary]==3.3.8
 pypdf>=5,<7
 python-dotenv>=1,<2
+# Local embedding model used by src/embeddings.py (pulls in torch).
+sentence-transformers>=3
+# Vector store actually used for the reported run (VECTOR_STORE=chroma, the default).
+chromadb>=1
