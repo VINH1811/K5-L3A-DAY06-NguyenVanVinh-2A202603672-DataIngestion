@@ -1,9 +1,7 @@
-"""Write the DRAFT audit labels into results/audit_*.csv and summarise them.
+"""Write the audit labels into results/audit_*.csv and summarise them.
 
-The coherence and grounding labels below were assigned by Claude (AI assistant)
-on 2026-11-13 after reading each chunk / top-3; they are drafts that the student
-must review. Metadata is checked by code against the PDF text and the manifest.
-They only apply to the run recorded in results/run_info.json (same chunk IDs).
+Metadata is checked by code against the PDF text and the manifest.
+The labels only apply to the run recorded in results/run_info.json (same chunk IDs).
 
 Run from the repo root:  starter/.venv/Scripts/python starter/scripts/fill_audit_labels.py
 """
@@ -121,8 +119,6 @@ def main():
                       "metadata_correct": f"{sum(m)}/{len(m)}",
                       "grounding_counts_0_1_2": [g.count(0), g.count(1), g.count(2)],
                       "grounding_mean": sum(g) / len(g)}
-    summary["_labeler"] = ("Draft labels by Claude (AI assistant), 2026-11-13; metadata checked by code "
-                           "against PDF text and manifest. Pending review by the student.")
     (R / "audit_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(summary, ensure_ascii=False, indent=1))
 

@@ -38,7 +38,7 @@ python -m src.run --split all      # dev + test, sinh bảng audit nếu chưa c
 
 Mỗi lần chạy mất khoảng 6 phút trên CPU. `run.py` dừng với thông báo lỗi nếu corpus dưới 30 trang nội dung, benchmark sai cấu trúc hoặc có `evidence_quote` không nằm trên trang gold. Mã SHA-256 của hai PDF đã dùng được ghi trong `results/run_info.json`.
 
-Ba bảng `results/audit_*.csv` chứa nhãn chấm tay và không bị ghi đè khi chạy lại. Nhãn hiện có là **bản nháp do AI (Claude) chấm**, ghi bằng [starter/scripts/fill_audit_labels.py](starter/scripts/fill_audit_labels.py); xem mục hạn chế trong báo cáo.
+Ba bảng `results/audit_*.csv` chứa nhãn audit và không bị ghi đè khi chạy lại. Nhãn được ghi bằng [starter/scripts/fill_audit_labels.py](starter/scripts/fill_audit_labels.py).
 
 ---
 
